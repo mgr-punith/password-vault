@@ -1,24 +1,25 @@
-"use client"
-import React, { useState, useEffect } from 'react';
-import { Lock, Check } from 'lucide-react';
+"use client";
+import React, { useState, useEffect } from "react";
+import { Lock, Check } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 const PasswordLanding = () => {
   const [scrolled, setScrolled] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  const navigate = (path: string) => console.log(`Navigate to: ${path}`);
 
   return (
     <div className="min-h-screen bg-gray-50">
-      
-      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? 'bg-white/90 backdrop-blur-md shadow' : 'bg-transparent'
-      }`}>
+      <header
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+          scrolled ? "bg-white/90 backdrop-blur-md shadow" : "bg-transparent"
+        }`}
+      >
         <div className="max-w-5xl mx-auto px-4 py-4 flex justify-between items-center">
           <div className="flex items-center gap-2">
             <Lock className="h-6 w-6 text-indigo-600" />
@@ -26,13 +27,13 @@ const PasswordLanding = () => {
           </div>
           <div className="flex gap-4">
             <button
-              onClick={() => navigate('/login')}
+              onClick={() => router.push("/login")}
               className="text-gray-700 hover:text-indigo-600 transition"
             >
               Sign In
             </button>
             <button
-              onClick={() => navigate('/login')}
+              onClick={() => router.push("/signup")}
               className="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition"
             >
               Get Started
@@ -46,17 +47,18 @@ const PasswordLanding = () => {
           Store your passwords securely.
         </h1>
         <p className="text-gray-600 mb-8 max-w-xl mx-auto">
-          SafePass keeps all your credentials safe and accessible across devices. No clutter, just security.
+          SafePass keeps all your credentials safe and accessible across
+          devices. No clutter, just security.
         </p>
         <div className="flex justify-center gap-4">
           <button
-            onClick={() => navigate('/signup')}
+            onClick={() => router.push("/signup")}
             className="px-6 py-3 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition"
           >
             Get Started
           </button>
           <button
-            onClick={() => navigate('/login')}
+            onClick={() => router.push("/login")}
             className="px-6 py-3 border border-gray-300 rounded-md text-gray-700 hover:text-indigo-600 transition"
           >
             Sign In
@@ -66,11 +68,26 @@ const PasswordLanding = () => {
         {/* Features */}
         <div className="mt-20 grid sm:grid-cols-2 md:grid-cols-3 gap-10 max-w-4xl mx-auto text-left">
           {[
-            { icon: Lock, title: "Encrypted Storage", desc: "All your passwords are encrypted locally and in transit." },
-            { icon: Check, title: "Easy Access", desc: "Quickly access your passwords from any device." },
-            { icon: Lock, title: "Zero Knowledge", desc: "We never see your passwords—your data is yours alone." },
+            {
+              icon: Lock,
+              title: "Encrypted Storage",
+              desc: "All your passwords are encrypted locally and in transit.",
+            },
+            {
+              icon: Check,
+              title: "Easy Access",
+              desc: "Quickly access your passwords from any device.",
+            },
+            {
+              icon: Lock,
+              title: "Zero Knowledge",
+              desc: "We never see your passwords—your data is yours alone.",
+            },
           ].map((feature, idx) => (
-            <div key={idx} className="flex flex-col items-start gap-3 p-4 bg-white rounded-xl shadow-sm hover:shadow-md transition">
+            <div
+              key={idx}
+              className="flex flex-col items-start gap-3 p-4 bg-white rounded-xl shadow-sm hover:shadow-md transition"
+            >
               <div className="bg-indigo-100 p-3 rounded-full">
                 <feature.icon className="h-6 w-6 text-indigo-600" />
               </div>
